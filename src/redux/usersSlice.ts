@@ -23,7 +23,14 @@ export const usersSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(getUsers.fulfilled, (state, action) => {
-      state.users = action.payload;
+      state.users = action.payload.map((user: User) => ({
+        ...user,
+        url: user.url.replace('via.placeholder', 'dummyimage'),
+        thumbnailUrl: user.thumbnailUrl.replace(
+          'via.placeholder',
+          'dummyimage',
+        ),
+      }));
     });
   },
 });
