@@ -5,3 +5,10 @@ export const getUsers = createAsyncThunk('users/getUsers', (_, thunkAPI) => {
     .then(item => item.json())
     .catch(e => console.log('Unexpected Error'));
 });
+
+export const getMoreUsers = createAsyncThunk('users/getMoreUsers', (_, thunkAPI) => {
+  return fetch('https://jsonplaceholder.typicode.com/photos')
+    .then(item => item.json())
+    .catch(e => console.log('Unexpected Error'));
+});
+
