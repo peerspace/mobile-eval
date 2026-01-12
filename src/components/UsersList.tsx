@@ -15,7 +15,8 @@ import {useUsersList} from '../hooks/useUsersList';
 
 function UsersList(): React.JSX.Element {
   const [isScrolling, setIsScrolling] = useState(false);
-  const {users, numOfUsers, firstScrolled, setFirstScrolled, dispatch} = useUsersList();
+  const {users, numOfUsers, firstScrolled, setFirstScrolled, dispatch} =
+    useUsersList();
 
   const onViewableItemsChanged = (info: {
     viewableItems: ViewToken<User>[];
@@ -48,14 +49,23 @@ function UsersList(): React.JSX.Element {
       <FlatList
         data={users}
         keyExtractor={item => item.id.toString()}
+        ItemSeparatorComponent={() => (
+          <View style={{height: 1, backgroundColor: 'gray'}} />
+        )}
         renderItem={({item}) => {
           return (
-            <View>
+            <View style={{padding: 16, borderRadius: 8}}>
               <Image
                 source={{uri: item.url}}
-                style={{width: 100, height: 100}}
+                style={{width: '100%', height: 600}}
               />
-              <Text>{item.title}</Text>
+              <View style={{paddingTop: 8, flexDirection: 'row', alignItems: 'center', gap: 8}}>
+                <Image
+                  source={{uri: item.thumbnailUrl}}
+                  style={{width: 30, height: 30, borderRadius: 15}}
+                />
+                <Text>{item.title}</Text>
+              </View>
             </View>
           );
         }}
