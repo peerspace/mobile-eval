@@ -21,6 +21,7 @@ export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {},
+  selectors: {},
   extraReducers: builder => {
     builder.addCase(getUsers.fulfilled, (state, action) => {
       state.users = action.payload.map((user: User) => ({
