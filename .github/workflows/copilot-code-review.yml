@@ -26,4 +26,4 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Materialize canon-rules skills
-        uses: peerspace/canon-rules/.github/actions/copilot-setup@0eaf335c038ec22e4bcf262a7cb4a3af657bcf9c # release-4
+        uses: peerspace/canon-rules/.github/actions/copilot-setup@develop
