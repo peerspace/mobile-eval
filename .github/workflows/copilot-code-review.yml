@@ -1,0 +1,29 @@
+# Installs canon-rules for Copilot PR reviews, see tf-infra/modules/github/repo
+# for more details.
+#
+# MANAGED BY tf-infra — DO NOT EDIT in this repo, edits are overwritten on the
+# next terraform apply.
+name: Copilot code review environment
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/copilot-code-review.yml
+
+jobs:
+  # The job MUST be named copilot-setup-steps (GitHub requirement).
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      # Clone ourselves so files the action adds live inside the review
+      # workspace; if setup steps don't clone, Copilot clones after they
+      # finish.
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Materialize canon-rules skills
+        uses: peerspace/canon-rules/.github/actions/copilot-setup@0eaf335c038ec22e4bcf262a7cb4a3af657bcf9c # release-4
